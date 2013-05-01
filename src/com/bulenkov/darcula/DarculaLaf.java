@@ -17,6 +17,7 @@ package com.bulenkov.darcula;
 
 import com.bulenkov.darcula.util.ColorUtil;
 import com.bulenkov.darcula.util.StringUtil;
+import com.bulenkov.darcula.util.UIManagerUtil;
 import sun.awt.AppContext;
 
 import javax.swing.*;
@@ -29,6 +30,8 @@ import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.*;
@@ -72,11 +75,21 @@ public final class DarculaLaf extends BasicLookAndFeel {
   @SuppressWarnings("UnusedParameters")
   private static void log(Exception e) {
     //everything is gonna be alright
-    //e.printStackTrace();
+    e.printStackTrace();
   }
 
   @Override
   public UIDefaults getDefaults() {
+    final Timer[] timer = new Timer[1];
+    timer[0] = new Timer(2000, new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        UIManagerUtil.showInfo();
+        timer[0].stop();
+      }
+    });
+    timer[0].start();
+
     try {
       final Method superMethod = BasicLookAndFeel.class.getDeclaredMethod("getDefaults");
       superMethod.setAccessible(true);

@@ -54,4 +54,15 @@ public class ColorUtil {
     }
   }
 
+  public static boolean isDark(final Color c) {
+    // based on perceptional luminosity, see
+    return (1 - (0.299 * c.getRed() + 0.587 * c.getGreen() + 0.114 * c.getBlue()) / 255) >= 0.5;
+  }
+
+  public static String toHex(final Color c) {
+    final String R = Integer.toHexString(c.getRed());
+    final String G = Integer.toHexString(c.getGreen());
+    final String B = Integer.toHexString(c.getBlue());
+    return (R.length() < 2 ? "0" : "") + R + (G.length() < 2 ? "0" : "") + G + (B.length() < 2 ? "0" : "") + B;
+  }
 }
