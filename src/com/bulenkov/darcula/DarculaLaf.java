@@ -1,23 +1,8 @@
-/*
- * Copyright 2000-2012 JetBrains s.r.o.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.bulenkov.darcula;
 
-import com.bulenkov.darcula.util.ColorUtil;
-import com.bulenkov.darcula.util.StringUtil;
-import com.bulenkov.darcula.util.UIManagerUtil;
+import com.bulenkov.iconloader.util.ColorUtil;
+import com.bulenkov.iconloader.util.StringUtil;
+import com.bulenkov.iconloader.util.SystemInfo;
 import sun.awt.AppContext;
 
 import javax.swing.*;
@@ -30,8 +15,6 @@ import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.*;
@@ -75,26 +58,16 @@ public final class DarculaLaf extends BasicLookAndFeel {
   @SuppressWarnings("UnusedParameters")
   private static void log(Exception e) {
     //everything is gonna be alright
-    e.printStackTrace();
+    //e.printStackTrace();
   }
 
   @Override
   public UIDefaults getDefaults() {
-    final Timer[] timer = new Timer[1];
-    timer[0] = new Timer(2000, new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        UIManagerUtil.showInfo();
-        timer[0].stop();
-      }
-    });
-    timer[0].start();
-
     try {
       final Method superMethod = BasicLookAndFeel.class.getDeclaredMethod("getDefaults");
       superMethod.setAccessible(true);
       final UIDefaults metalDefaults =
-        (UIDefaults)superMethod.invoke(new MetalLookAndFeel());
+          (UIDefaults)superMethod.invoke(new MetalLookAndFeel());
       final UIDefaults defaults = (UIDefaults)superMethod.invoke(base);
       initInputMapDefaults(defaults);
       initIdeaDefaults(defaults);
@@ -121,10 +94,10 @@ public final class DarculaLaf extends BasicLookAndFeel {
   private static void patchStyledEditorKit() {
     try {
       StyleSheet defaultStyles = new StyleSheet();
-	InputStream is = DarculaLaf.class.getResourceAsStream("darcula.css");
-	Reader r = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-	defaultStyles.loadRules(r, null);
-	r.close();
+      InputStream is = DarculaLaf.class.getResourceAsStream("darcula.css");
+      Reader r = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+      defaultStyles.loadRules(r, null);
+      r.close();
       final Field keyField = HTMLEditorKit.class.getDeclaredField("DEFAULT_STYLES_KEY");
       keyField.setAccessible(true);
       final Object key = keyField.get(null);
@@ -153,54 +126,54 @@ public final class DarculaLaf extends BasicLookAndFeel {
   static void initIdeaDefaults(UIDefaults defaults) {
     loadDefaults(defaults);
     defaults.put("Table.ancestorInputMap", new UIDefaults.LazyInputMap(new Object[] {
-      "ctrl C", "copy",
-      "ctrl V", "paste",
-      "ctrl X", "cut",
-      "COPY", "copy",
-      "PASTE", "paste",
-      "CUT", "cut",
-      "control INSERT", "copy",
-      "shift INSERT", "paste",
-      "shift DELETE", "cut",
-      "RIGHT", "selectNextColumn",
-      "KP_RIGHT", "selectNextColumn",
-      "LEFT", "selectPreviousColumn",
-      "KP_LEFT", "selectPreviousColumn",
-      "DOWN", "selectNextRow",
-      "KP_DOWN", "selectNextRow",
-      "UP", "selectPreviousRow",
-      "KP_UP", "selectPreviousRow",
-      "shift RIGHT", "selectNextColumnExtendSelection",
-      "shift KP_RIGHT", "selectNextColumnExtendSelection",
-      "shift LEFT", "selectPreviousColumnExtendSelection",
-      "shift KP_LEFT", "selectPreviousColumnExtendSelection",
-      "shift DOWN", "selectNextRowExtendSelection",
-      "shift KP_DOWN", "selectNextRowExtendSelection",
-      "shift UP", "selectPreviousRowExtendSelection",
-      "shift KP_UP", "selectPreviousRowExtendSelection",
-      "PAGE_UP", "scrollUpChangeSelection",
-      "PAGE_DOWN", "scrollDownChangeSelection",
-      "HOME", "selectFirstColumn",
-      "END", "selectLastColumn",
-      "shift PAGE_UP", "scrollUpExtendSelection",
-      "shift PAGE_DOWN", "scrollDownExtendSelection",
-      "shift HOME", "selectFirstColumnExtendSelection",
-      "shift END", "selectLastColumnExtendSelection",
-      "ctrl PAGE_UP", "scrollLeftChangeSelection",
-      "ctrl PAGE_DOWN", "scrollRightChangeSelection",
-      "ctrl HOME", "selectFirstRow",
-      "ctrl END", "selectLastRow",
-      "ctrl shift PAGE_UP", "scrollRightExtendSelection",
-      "ctrl shift PAGE_DOWN", "scrollLeftExtendSelection",
-      "ctrl shift HOME", "selectFirstRowExtendSelection",
-      "ctrl shift END", "selectLastRowExtendSelection",
-      "TAB", "selectNextColumnCell",
-      "shift TAB", "selectPreviousColumnCell",
-      //"ENTER", "selectNextRowCell",
-      "shift ENTER", "selectPreviousRowCell",
-      "ctrl A", "selectAll",
-      //"ESCAPE", "cancel",
-      "F2", "startEditing"
+        "ctrl C", "copy",
+        "ctrl V", "paste",
+        "ctrl X", "cut",
+        "COPY", "copy",
+        "PASTE", "paste",
+        "CUT", "cut",
+        "control INSERT", "copy",
+        "shift INSERT", "paste",
+        "shift DELETE", "cut",
+        "RIGHT", "selectNextColumn",
+        "KP_RIGHT", "selectNextColumn",
+        "LEFT", "selectPreviousColumn",
+        "KP_LEFT", "selectPreviousColumn",
+        "DOWN", "selectNextRow",
+        "KP_DOWN", "selectNextRow",
+        "UP", "selectPreviousRow",
+        "KP_UP", "selectPreviousRow",
+        "shift RIGHT", "selectNextColumnExtendSelection",
+        "shift KP_RIGHT", "selectNextColumnExtendSelection",
+        "shift LEFT", "selectPreviousColumnExtendSelection",
+        "shift KP_LEFT", "selectPreviousColumnExtendSelection",
+        "shift DOWN", "selectNextRowExtendSelection",
+        "shift KP_DOWN", "selectNextRowExtendSelection",
+        "shift UP", "selectPreviousRowExtendSelection",
+        "shift KP_UP", "selectPreviousRowExtendSelection",
+        "PAGE_UP", "scrollUpChangeSelection",
+        "PAGE_DOWN", "scrollDownChangeSelection",
+        "HOME", "selectFirstColumn",
+        "END", "selectLastColumn",
+        "shift PAGE_UP", "scrollUpExtendSelection",
+        "shift PAGE_DOWN", "scrollDownExtendSelection",
+        "shift HOME", "selectFirstColumnExtendSelection",
+        "shift END", "selectLastColumnExtendSelection",
+        "ctrl PAGE_UP", "scrollLeftChangeSelection",
+        "ctrl PAGE_DOWN", "scrollRightChangeSelection",
+        "ctrl HOME", "selectFirstRow",
+        "ctrl END", "selectLastRow",
+        "ctrl shift PAGE_UP", "scrollRightExtendSelection",
+        "ctrl shift PAGE_DOWN", "scrollLeftExtendSelection",
+        "ctrl shift HOME", "selectFirstRowExtendSelection",
+        "ctrl shift END", "selectLastRowExtendSelection",
+        "TAB", "selectNextColumnCell",
+        "shift TAB", "selectPreviousColumnCell",
+        //"ENTER", "selectNextRowCell",
+        "shift ENTER", "selectPreviousRowCell",
+        "ctrl A", "selectAll",
+        //"ESCAPE", "cancel",
+        "F2", "startEditing"
     }));
   }
 
@@ -247,9 +220,9 @@ public final class DarculaLaf extends BasicLookAndFeel {
     if (key.endsWith("Insets")) {
       final List<String> numbers = StringUtil.split(value, ",");
       return new InsetsUIResource(Integer.parseInt(numbers.get(0)),
-                                             Integer.parseInt(numbers.get(1)),
-                                             Integer.parseInt(numbers.get(2)),
-                                             Integer.parseInt(numbers.get(3)));
+          Integer.parseInt(numbers.get(1)),
+          Integer.parseInt(numbers.get(2)),
+          Integer.parseInt(numbers.get(3)));
     } else if (key.endsWith(".border")) {
       try {
         return Class.forName(value).newInstance();
@@ -331,9 +304,9 @@ public final class DarculaLaf extends BasicLookAndFeel {
   protected void loadSystemColors(UIDefaults defaults, String[] systemColors, boolean useNative) {
     try {
       final Method superMethod = BasicLookAndFeel.class.getDeclaredMethod("loadSystemColors",
-                                                                   UIDefaults.class,
-                                                                   String[].class,
-                                                                   boolean.class);
+          UIDefaults.class,
+          String[].class,
+          boolean.class);
       superMethod.setAccessible(true);
       superMethod.invoke(base, defaults, systemColors, useNative);
     }
@@ -390,7 +363,4 @@ public final class DarculaLaf extends BasicLookAndFeel {
     inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_MASK | InputEvent.CTRL_DOWN_MASK), pasteActionKey);
     inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK | InputEvent.CTRL_DOWN_MASK), DefaultEditorKit.cutAction);
   }
-
-
-
 }

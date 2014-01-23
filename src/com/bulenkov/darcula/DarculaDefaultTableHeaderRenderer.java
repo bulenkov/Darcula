@@ -1,4 +1,4 @@
-package com.intellij.ide.ui.laf.darcula;
+package com.bulenkov.darcula;
 
 import javax.swing.*;
 import javax.swing.plaf.UIResource;

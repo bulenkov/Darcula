@@ -15,7 +15,7 @@ public class DarculaTableHeaderBorder implements Border, UIResource {
 
   @Override
   public Insets getBorderInsets(Component c) {
-    return new Insets(0, 0, 0, 0);
+    return new Insets(0,0,0,0);
   }
 
   @Override

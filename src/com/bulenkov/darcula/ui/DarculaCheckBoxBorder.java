@@ -15,8 +15,8 @@
  */
 package com.bulenkov.darcula.ui;
 
-import com.bulenkov.darcula.SystemInfo;
-import com.bulenkov.darcula.util.UIUtil;
+import com.bulenkov.iconloader.util.SystemInfo;
+import com.bulenkov.iconloader.util.UIUtil;
 
 import javax.swing.*;
 import javax.swing.border.Border;

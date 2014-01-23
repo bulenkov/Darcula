@@ -39,20 +39,7 @@
 
 
 import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.text.*;
-import javax.swing.border.*;
-import javax.swing.colorchooser.*;
-import javax.swing.filechooser.*;
-import javax.accessibility.*;
-
 import java.awt.*;
-import java.awt.event.*;
-import java.beans.*;
-import java.util.*;
-import java.io.*;
-import java.applet.*;
-import java.net.*;
 
 /**
  * ToolTip Demo
@@ -133,7 +120,7 @@ public class ToolTipDemo extends DemoModule {
 	    
 	    if((x > 30) && (x < 60) && (y > 60) && (y < 85)) {
 		if(!moo) {
-		    setToolTipText("<html><center><font color=blue size=+2>" +
+		    setToolTipText("<html><center><font color='#589df6' size=+2>" +
 				   getString("ToolTipDemo.moo") + "</font></center></html>");
 		    moo = true;
 		    milk = false;

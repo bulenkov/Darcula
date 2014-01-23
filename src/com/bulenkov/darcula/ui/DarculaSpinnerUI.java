@@ -1,5 +1,5 @@
 /*
- * Copyright 2000-2012 JetBrains s.r.o.
+ * Copyright 2000-2013 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,7 @@
  */
 package com.bulenkov.darcula.ui;
 
-import com.bulenkov.darcula.util.GraphicsConfig;
-import com.bulenkov.darcula.util.GraphicsUtil;
+import com.bulenkov.iconloader.util.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -113,13 +112,14 @@ public class DarculaSpinnerUI extends BasicSpinnerUI {
   }
 
   private JButton createArrow(int direction) {
-    final Color shadow = UIManager.getColor("Panel.background");
-    final Color darkShadow = UIManager.getColor("Label.foreground");
-    JButton b = new BasicArrowButton(direction, shadow, shadow, darkShadow, shadow) {
+    final Color shadow = UIUtil.getPanelBackground();
+    final Color enabledColor = new DoubleColor(Gray._255, UIUtil.getLabelForeground());
+    final Color disabledColor = new DoubleColor(Gray._200, UIUtil.getLabelForeground().darker());
+    JButton b = new BasicArrowButton(direction, shadow, shadow, enabledColor, shadow) {
       @Override
       public void paint(Graphics g) {
         int y = direction == NORTH ? getHeight() - 6 : 2;
-        paintTriangle(g, 0, y, 0, direction, DarculaSpinnerUI.this.spinner.isEnabled());
+        paintTriangle(g, (getWidth() - 8)/2 - 1, y, 0, direction, DarculaSpinnerUI.this.spinner.isEnabled());
       }
 
       @Override
@@ -135,7 +135,7 @@ public class DarculaSpinnerUI extends BasicSpinnerUI {
         final int h = 6;
         mid = w  / 2;
 
-        g.setColor(isEnabled ? darkShadow : darkShadow.darker());
+        g.setColor(isEnabled ? enabledColor : disabledColor);
 
         g.translate(x, y);
         switch (direction) {

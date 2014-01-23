@@ -15,9 +15,9 @@
  */
 package com.bulenkov.darcula;
 
-import com.bulenkov.darcula.util.ColorUtil;
-import com.bulenkov.darcula.util.GraphicsConfig;
-import com.bulenkov.darcula.util.Gray;
+import com.bulenkov.iconloader.util.ColorUtil;
+import com.bulenkov.iconloader.util.GraphicsConfig;
+import com.bulenkov.iconloader.util.Gray;
 
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
