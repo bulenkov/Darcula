@@ -172,6 +172,7 @@ public final class DarculaLaf extends BasicLookAndFeel {
         //"ENTER", "selectNextRowCell",
         "shift ENTER", "selectPreviousRowCell",
         "ctrl A", "selectAll",
+        "meta A", "selectAll",
         //"ESCAPE", "cancel",
         "F2", "startEditing"
     }));
