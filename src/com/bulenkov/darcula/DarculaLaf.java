@@ -218,6 +218,9 @@ public final class DarculaLaf extends BasicLookAndFeel {
   }
 
   private static Object parseValue(String key, String value) {
+    if ("null".equals(value)) {
+      return null;
+    }
     if (key.endsWith("Insets")) {
       final List<String> numbers = StringUtil.split(value, ",");
       return new InsetsUIResource(Integer.parseInt(numbers.get(0)),
