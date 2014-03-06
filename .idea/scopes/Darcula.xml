@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Darcula" pattern="file:src//*" />
+</component>

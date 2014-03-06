@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="SwingSet3 Libraries">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/demo/AnimatedTransitions.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/demo/AppFramework.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/demo/swing-worker.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/demo/swingx.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/demo/TimingFramework.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

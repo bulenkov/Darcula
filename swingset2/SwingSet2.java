@@ -46,10 +46,7 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.reflect.Constructor;
-import java.util.Iterator;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * A demo that shows all of the Swing components.
@@ -723,7 +720,30 @@ public class SwingSet2 extends JPanel {
 	    f.show();
             numSSs++;
             swingSets.add(this);
-	} 
+
+    final UIDefaults defaults = UIManager.getDefaults();
+    Enumeration keys = defaults.keys();
+    final Object[][] data = new Object[defaults.size()][2];
+    int i = 0;
+    while (keys.hasMoreElements()) {
+      Object key = keys.nextElement();
+      data[i][0] = key;
+      data[i][1] = defaults.get(key);
+      i++;
+    }
+
+    Arrays.sort(data, new Comparator<Object[]>() {
+      @Override
+      public int compare(Object[] o1, Object[] o2) {
+        return o1[0 ].toString().compareTo(o2[0].toString());
+      }
+    });
+    for (int j = 0; j < data.length; j++) {
+      Object[] objects = data[j];
+      System.out.println(objects[0] + ": " + objects[1]);
+
+    }
+  }
     }
 
     /**
