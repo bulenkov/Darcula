@@ -31,6 +31,8 @@
 
 package com.sun.swingset3;
 
+import com.bulenkov.darcula.DarculaLaf;
+import com.bulenkov.darcula.DarculaLookAndFeelInfo;
 import com.sun.swingset3.codeview.CodeViewer;
 import com.sun.swingset3.utilities.AnimatingSplitPane;
 import com.sun.swingset3.utilities.RoundedBorder;
@@ -422,6 +424,7 @@ public class SwingSet3 extends SingleFrameApplication  {
         UIManager.LookAndFeelInfo lookAndFeelInfos[] = UIManager.getInstalledLookAndFeels();
         lookAndFeel = UIManager.getLookAndFeel().getClass().getName();
         lookAndFeelRadioGroup = new ButtonGroup();
+        menu.add(createLookAndFeelItem(new DarculaLookAndFeelInfo().getName(), DarculaLaf.class.getName()));
         for(UIManager.LookAndFeelInfo lafInfo: lookAndFeelInfos) {
             menu.add(createLookAndFeelItem(lafInfo.getName(), lafInfo.getClassName()));
         }  
