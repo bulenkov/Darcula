@@ -33,6 +33,7 @@ package com.sun.swingset3;
 
 import com.bulenkov.darcula.DarculaLaf;
 import com.bulenkov.darcula.DarculaLookAndFeelInfo;
+import com.bulenkov.iconloader.util.DoubleColor;
 import com.sun.swingset3.codeview.CodeViewer;
 import com.sun.swingset3.utilities.AnimatingSplitPane;
 import com.sun.swingset3.utilities.RoundedBorder;
@@ -85,7 +86,7 @@ public class SwingSet3 extends SingleFrameApplication  {
 
     public static final int MAIN_FRAME_WIDTH = 880;
     public static final int MAIN_FRAME_HEIGHT = 640;
-    public static final int DEMO_SELECTOR_WIDTH = 186;
+    public static final int DEMO_SELECTOR_WIDTH = 230;
     public static final int DEMO_PANEL_HEIGHT = 400;
     public static final int DEMO_PANEL_WIDTH = MAIN_FRAME_WIDTH - DEMO_SELECTOR_WIDTH;
 
@@ -309,11 +310,11 @@ public class SwingSet3 extends SingleFrameApplication  {
         float hsb[] = Color.RGBtoHSB(
                 titleColor.getRed(), titleColor.getGreen(), titleColor.getBlue(), null);
         UIManager.put(TITLE_GRADIENT_COLOR1_KEY, 
-                Color.getHSBColor(hsb[0]-.013f, .15f, .85f));
+                new DoubleColor(Color.getHSBColor(hsb[0]-.013f, .15f, .85f), new Color(0, 79, 114)));
         UIManager.put(TITLE_GRADIENT_COLOR2_KEY, 
-                Color.getHSBColor(hsb[0]-.005f, .24f, .80f));
+                new DoubleColor(Color.getHSBColor(hsb[0]-.005f, .24f, .80f), new Color(49, 113, 164)));
         UIManager.put(TITLE_FOREGROUND_KEY, 
-                Color.getHSBColor(hsb[0], .54f, .40f));
+                new DoubleColor(Color.getHSBColor(hsb[0], .54f, .40f), new Color(0xbbbbbb)));
         
         // Calculate highlight color for code pane
         UIManager.put(CODE_HIGHLIGHT_KEY,

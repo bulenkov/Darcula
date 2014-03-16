@@ -39,6 +39,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import com.bulenkov.iconloader.util.UIUtil;
 import com.sun.swingset3.DemoProperties;
 import com.sun.swingset3.demos.ResourceManager;
 
@@ -142,6 +143,9 @@ public class TabbedPaneDemo extends JPanel implements ActionListener {
         tabbedpane.add(name, pix);
         
         name = resourceManager.getString("TabbedPaneDemo.bounce");
+        if (UIUtil.isUnderDarcula()) {
+          name = name.replace("color=blue", "color='#589df6'");
+        }
         spin = new HeadSpin();
         tabbedpane.add(name, spin);
 

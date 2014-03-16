@@ -31,19 +31,12 @@
 
 package com.sun.swingset3.utilities;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
+import com.bulenkov.iconloader.util.DoubleColor;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import javax.swing.Icon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 
 /**
  *
@@ -168,7 +161,7 @@ public class ArrowIcon implements Icon, SwingConstants {
         panel.add(new JLabel("west", new ArrowIcon(ArrowIcon.WEST), JLabel.CENTER));
         panel.add(new JLabel("south", new ArrowIcon(ArrowIcon.SOUTH), JLabel.CENTER));
         panel.add(new JLabel("east", new ArrowIcon(ArrowIcon.EAST), JLabel.CENTER));
-        panel.add(new JLabel("east-20", new ArrowIcon(ArrowIcon.EAST, 20, Color.blue), JLabel.CENTER));
+        panel.add(new JLabel("east-20", new ArrowIcon(ArrowIcon.EAST, 20, DoubleColor.blue), JLabel.CENTER));
         
         frame.pack();
         frame.setVisible(true);

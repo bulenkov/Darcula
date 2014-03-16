@@ -31,22 +31,19 @@
 
 package com.sun.swingset3.demos.frame;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.net.URL;
+import com.bulenkov.iconloader.util.DoubleColor;
+import com.sun.swingset3.DemoProperties;
+import com.sun.swingset3.demos.DemoUtilities;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
-import com.sun.swingset3.DemoProperties;
-import com.sun.swingset3.demos.DemoUtilities;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.URL;
 
 /**
  * Demo for Swing's JFrame toplevel component.
@@ -166,7 +163,7 @@ public class FrameDemo extends JPanel {
         JLabel label = new JLabel("I'm content but a little blue.");
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setPreferredSize(new Dimension(300, 160));
-        label.setBackground(new Color(197, 216, 236));
+        label.setBackground(new DoubleColor(new Color(197, 216, 236), new Color(102, 117, 136)));
         label.setOpaque(true); // labels non-opaque by default
         frame.add(label);
         //snip

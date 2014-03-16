@@ -21,21 +21,11 @@
 
 package org.jdesktop.swingx;
 
-import java.awt.AlphaComposite;
-import java.awt.Composite;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.LayoutManager;
-import java.awt.Rectangle;
-
-import java.awt.image.BufferedImage;
-import javax.swing.JPanel;
-import javax.swing.RepaintManager;
-import javax.swing.Scrollable;
-import org.jdesktop.swingx.RepaintManagerX;
-import org.jdesktop.swingx.TranslucentRepaintManager;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * A simple JPanel extension that adds translucency support.
@@ -122,10 +112,10 @@ public class JXPanel extends JPanel implements Scrollable {
                 //replacing the repaint manager. In retrospect, I'd probably
                 //opt for making this a manual choice. There really isn't a clear
                 //win, no matter the approach.
-                RepaintManager manager = RepaintManager.currentManager(this);
-                if (!manager.getClass().isAnnotationPresent(TranslucentRepaintManager.class)) {
-                    RepaintManager.setCurrentManager(new RepaintManagerX());
-                }
+//                RepaintManager manager = RepaintManager.currentManager(this);
+//                if (!manager.getClass().isAnnotationPresent(TranslucentRepaintManager.class)) {
+//                    RepaintManager.setCurrentManager(new RepaintManagerX());
+//                }
             } else if (alpha == 1) {
                 //restore the oldOpaque if it was true (since opaque is false now)
                 if (oldOpaque) {

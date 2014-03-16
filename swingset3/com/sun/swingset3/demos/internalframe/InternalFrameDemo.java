@@ -31,17 +31,17 @@
 
 package com.sun.swingset3.demos.internalframe;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import javax.swing.*;
-
-import javax.swing.border.EmptyBorder;
-
+import com.bulenkov.iconloader.util.DoubleColor;
+import com.bulenkov.iconloader.util.Gray;
+import com.bulenkov.iconloader.util.UIUtil;
 import com.sun.swingset3.DemoProperties;
 import com.sun.swingset3.demos.ResourceManager;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 
 
 /**
@@ -297,7 +297,7 @@ public class InternalFrameDemo extends JPanel {
 
         palette.getContentPane().add(p, BorderLayout.CENTER);
 
-        // ************************************
+      // ************************************
         // *   Create Frame title textfield   *
         // ************************************
         p = new JPanel();
@@ -314,8 +314,11 @@ public class InternalFrameDemo extends JPanel {
         p.add(Box.createRigidArea(HGAP5));
 
         palette.getContentPane().add(p, BorderLayout.SOUTH);
-
-        palette.show();
+      final JComponent panel = (JComponent) palette.getContentPane();
+      if (UIUtil.isUnderDarcula()) {
+        panel.setBorder(new LineBorder(Gray._80));
+      }
+      palette.show();
     }
 
 
@@ -342,7 +345,7 @@ public class InternalFrameDemo extends JPanel {
         public ImageScroller(Icon icon) {
             super();
             JPanel p = new JPanel();
-            p.setBackground(Color.white);
+            p.setBackground(new DoubleColor(Color.white, Gray._80));
             p.setLayout(new BorderLayout());
 
             p.add(new JLabel(icon), BorderLayout.CENTER);

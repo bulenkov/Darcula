@@ -31,33 +31,19 @@
 
 package com.sun.swingset3;
 
-import com.sun.swingset3.utilities.HTMLPanel;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.Rectangle;
-import java.awt.geom.Rectangle2D;
-import java.io.IOException;
-import java.net.URL;
-import javax.swing.JComponent;
-import javax.swing.JEditorPane;
-import javax.swing.UIManager;
-import javax.swing.border.Border;
-
+import com.sun.swingset3.utilities.*;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 import org.jdesktop.animation.timing.triggers.TimingTrigger;
 import org.jdesktop.animation.timing.triggers.TimingTriggerEvent;
 import org.jdesktop.swingx.JXPanel;
-import com.sun.swingset3.utilities.RoundedBorder;
-import com.sun.swingset3.utilities.RoundedPanel;
-import com.sun.swingset3.utilities.RoundedTitleBorder;
-import com.sun.swingset3.utilities.Utilities;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+import java.net.URL;
 
 /**
  *
@@ -123,7 +109,7 @@ public class DemoPanel extends JXPanel {
         }
     } // Fader
 
-    private static class LoadAnimationPanel extends RoundedPanel {
+    public static class LoadAnimationPanel extends RoundedPanel {
         private String message;
         private int triState = 0;
         private boolean animating = false;

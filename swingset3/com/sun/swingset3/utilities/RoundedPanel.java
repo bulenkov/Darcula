@@ -31,17 +31,12 @@
 
 package com.sun.swingset3.utilities;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.LayoutManager;
-import java.awt.geom.RoundRectangle2D;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import com.bulenkov.iconloader.util.DoubleColor;
 import org.jdesktop.swingx.JXPanel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.geom.RoundRectangle2D;
 
 /**
  *
@@ -99,7 +94,7 @@ public class RoundedPanel extends JXPanel {
         JFrame frame = new JFrame();
         RoundedPanel p = new RoundedPanel(new BorderLayout(), 16);
         JPanel p2 = new JPanel();
-        p2.setBackground(Color.blue);
+        p2.setBackground(DoubleColor.blue);
         p.add(p2);
         frame.add(p);
         frame.setSize(200, 200);

@@ -31,21 +31,13 @@
 
 package com.sun.swingset3.demos;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Graphics;
-import java.awt.Insets;
-import java.awt.Rectangle;
+import com.bulenkov.iconloader.util.DoubleColor;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.net.URI;
 import java.net.URISyntaxException;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ButtonModel;
-import javax.swing.Icon;
-import javax.swing.JButton;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 
 
 /**
@@ -71,8 +63,8 @@ public class JHyperlink extends JButton {
     private boolean drawUnderline = true;
     
     static {
-        UIManager.put("Hyperlink.foreground", Color.blue);
-        UIManager.put("Hyperlink.activeForeground", Color.red);
+        UIManager.put("Hyperlink.foreground", DoubleColor.blue);
+        UIManager.put("Hyperlink.activeForeground", DoubleColor.red);
         UIManager.put("Hyperlink.visitedForeground", new Color(85, 145, 90));        
     }    
     

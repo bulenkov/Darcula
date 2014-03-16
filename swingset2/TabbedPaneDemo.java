@@ -38,6 +38,8 @@
  */
 
 
+import com.bulenkov.iconloader.util.UIUtil;
+
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
@@ -127,7 +129,11 @@ public class TabbedPaneDemo extends DemoModule implements ActionListener {
 	tabbedpane.add(name, pix);
 
 	name = getString("TabbedPaneDemo.bounce");
-	spin = new HeadSpin();
+  if (UIUtil.isUnderDarcula()) {
+    name = name.replace("color=blue", "color='#589df6'");
+  }
+
+      spin = new HeadSpin();
 	tabbedpane.add(name, spin);
 	
 	tabbedpane.getModel().addChangeListener(

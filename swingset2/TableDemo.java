@@ -38,6 +38,8 @@
  */
 
 
+import com.bulenkov.iconloader.util.DoubleColor;
+
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
@@ -401,23 +403,23 @@ public class TableDemo extends DemoModule {
 	NamedColor beige       = new NamedColor(new Color(245, 245, 220), getString("TableDemo.beige"));
 	NamedColor black       = new NamedColor(Color.black, getString("TableDemo.black"));
 	NamedColor blue        = new NamedColor(new Color(0, 0, 222), getString("TableDemo.blue"));
-	NamedColor eblue       = new NamedColor(Color.blue, getString("TableDemo.eblue"));
+	NamedColor eblue       = new NamedColor(DoubleColor.blue, getString("TableDemo.eblue"));
 	NamedColor jfcblue     = new NamedColor(new Color(204, 204, 255), getString("TableDemo.jfcblue"));
 	NamedColor jfcblue2    = new NamedColor(new Color(153, 153, 204), getString("TableDemo.jfcblue2"));
-	NamedColor cybergreen  = new NamedColor(Color.green.darker().brighter(), getString("TableDemo.cybergreen"));
+	NamedColor cybergreen  = new NamedColor(DoubleColor.green.darker().brighter(), getString("TableDemo.cybergreen"));
 	NamedColor darkgreen   = new NamedColor(new Color(0, 100, 75), getString("TableDemo.darkgreen"));
-	NamedColor forestgreen = new NamedColor(Color.green.darker(), getString("TableDemo.forestgreen"));
-	NamedColor gray        = new NamedColor(Color.gray, getString("TableDemo.gray"));
-	NamedColor green       = new NamedColor(Color.green, getString("TableDemo.green"));
+	NamedColor forestgreen = new NamedColor(DoubleColor.green.darker(), getString("TableDemo.forestgreen"));
+	NamedColor gray        = new NamedColor(DoubleColor.gray, getString("TableDemo.gray"));
+	NamedColor green       = new NamedColor(DoubleColor.green, getString("TableDemo.green"));
 	NamedColor orange      = new NamedColor(new Color(255, 165, 0), getString("TableDemo.orange"));
 	NamedColor purple      = new NamedColor(new Color(160, 32, 240),  getString("TableDemo.purple"));
-	NamedColor red         = new NamedColor(Color.red, getString("TableDemo.red"));
-	NamedColor rustred     = new NamedColor(Color.red.darker(), getString("TableDemo.rustred"));
+	NamedColor red         = new NamedColor(DoubleColor.red, getString("TableDemo.red"));
+	NamedColor rustred     = new NamedColor(DoubleColor.red.darker(), getString("TableDemo.rustred"));
 	NamedColor sunpurple   = new NamedColor(new Color(100, 100, 255), getString("TableDemo.sunpurple"));
 	NamedColor suspectpink = new NamedColor(new Color(255, 105, 180), getString("TableDemo.suspectpink"));
 	NamedColor turquoise   = new NamedColor(new Color(0, 255, 255), getString("TableDemo.turquoise"));
 	NamedColor violet      = new NamedColor(new Color(238, 130, 238), getString("TableDemo.violet"));
-	NamedColor yellow      = new NamedColor(Color.yellow, getString("TableDemo.yellow"));
+	NamedColor yellow      = new NamedColor(DoubleColor.yellow, getString("TableDemo.yellow"));
 
         // Create the dummy data (a few rows of names)
         final Object[][] data = {
