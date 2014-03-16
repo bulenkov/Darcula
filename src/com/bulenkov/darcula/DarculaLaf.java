@@ -16,6 +16,7 @@
 
 package com.bulenkov.darcula;
 
+import com.bulenkov.iconloader.IconLoader;
 import com.bulenkov.iconloader.util.ColorUtil;
 import com.bulenkov.iconloader.util.StringUtil;
 import com.bulenkov.iconloader.util.SystemInfo;
@@ -92,6 +93,9 @@ public final class DarculaLaf extends BasicLookAndFeel {
       patchComboBox(metalDefaults, defaults);
       defaults.remove("Spinner.arrowButtonBorder");
       defaults.put("Spinner.arrowButtonSize", new Dimension(16, 5));
+      defaults.put("Tree.collapsedIcon", new IconUIResource(IconLoader.getIcon("/com/bulenkov/darcula/icons/treeNodeCollapsed.png")));
+      defaults.put("Tree.expandedIcon", new IconUIResource(IconLoader.getIcon("/com/bulenkov/darcula/icons/treeNodeExpanded.png")));
+
       return defaults;
     }
     catch (Exception ignore) {

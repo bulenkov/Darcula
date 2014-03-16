@@ -15,11 +15,9 @@
  */
 package com.bulenkov.darcula;
 
-import com.bulenkov.iconloader.util.ColorUtil;
-import com.bulenkov.iconloader.util.DoubleColor;
-import com.bulenkov.iconloader.util.SystemInfo;
-import com.bulenkov.iconloader.util.UIUtil;
+import com.bulenkov.iconloader.util.*;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -140,5 +138,35 @@ public class DarculaUIUtil {
     g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, oldStrokeControlValue);
   }
 
+  public static Icon getTreeNodeIcon(boolean expanded, boolean selected, boolean focused) {
+    boolean white = (selected && focused) || UIUtil.isUnderDarcula();
+
+    Icon selectedIcon = getTreeSelectedExpandedIcon();
+    Icon notSelectedIcon = getTreeExpandedIcon();
+
+    int width = Math.max(selectedIcon.getIconWidth(), notSelectedIcon.getIconWidth());
+    int height = Math.max(selectedIcon.getIconWidth(), notSelectedIcon.getIconWidth());
+
+    return new CenteredIcon(expanded ? (white ? getTreeSelectedExpandedIcon() : getTreeExpandedIcon())
+        : (white ? getTreeSelectedCollapsedIcon() : getTreeCollapsedIcon()),
+        width, height, false
+    );
+  }
+
+  public static Icon getTreeCollapsedIcon() {
+    return UIManager.getIcon("Tree.collapsedIcon");
+  }
+
+  public static Icon getTreeExpandedIcon() {
+    return UIManager.getIcon("Tree.expandedIcon");
+  }
+
+  public static Icon getTreeSelectedCollapsedIcon() {
+    return getTreeCollapsedIcon();
+  }
+
+  public static Icon getTreeSelectedExpandedIcon() {
+    return getTreeExpandedIcon();
+  }
 
 }

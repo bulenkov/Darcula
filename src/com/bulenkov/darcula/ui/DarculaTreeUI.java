@@ -16,6 +16,7 @@
 package com.bulenkov.darcula.ui;
 
 
+import com.bulenkov.darcula.DarculaUIUtil;
 import com.bulenkov.iconloader.util.SystemInfo;
 import com.bulenkov.iconloader.util.UIUtil;
 
@@ -413,8 +414,8 @@ public class DarculaTreeUI extends BasicTreeUI {
                                     boolean isLeaf) {
     boolean isPathSelected = tree.getSelectionModel().isPathSelected(path);
     if (!isLeaf(row)) {
-      setExpandedIcon(UIUtil.getTreeNodeIcon(true, isPathSelected, tree.hasFocus()));
-      setCollapsedIcon(UIUtil.getTreeNodeIcon(false, isPathSelected, tree.hasFocus()));
+      setExpandedIcon(DarculaUIUtil.getTreeNodeIcon(true, isPathSelected, tree.hasFocus()));
+      setCollapsedIcon(DarculaUIUtil.getTreeNodeIcon(false, isPathSelected, tree.hasFocus()));
     }
 
     super.paintExpandControl(g, clipBounds, insets, bounds, path, row, isExpanded, hasBeenExpanded, isLeaf);

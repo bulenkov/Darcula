@@ -31,16 +31,11 @@
 
 package com.sun.swingset3.utilities;
 
-import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
-import java.awt.Transparency;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.net.URL;
-import javax.jnlp.ServiceManager;
-import javax.swing.SwingConstants;
 
 /**
  *
@@ -53,7 +48,7 @@ public class Utilities {
     }
     
     public static boolean runningFromWebStart() {
-        return ServiceManager.getServiceNames() != null;        
+        return false;
     }
 
     public static String getURLFileName(URL url) {

@@ -399,8 +399,8 @@ public class TableDemo extends JPanel {
                     new ArrayList<RowFilter<OscarTableModel, Integer>>(2);
             filters.add(winnerFilter);
             filters.add(searchFilter);
-            RowFilter<Object, Object> comboFilter = RowFilter.andFilter((Iterable<? extends RowFilter<? super Object,? super Object>>) filters);
-            sorter.setRowFilter(comboFilter);
+//            RowFilter<? super Object, ? super Object> comboFilter = RowFilter.andFilter((Iterable<? extends RowFilter<? super Object, ? super Object>>) filters);
+            sorter.setRowFilter(RowFilter.andFilter(filters));
         } else if (showOnlyWinners) {
             sorter.setRowFilter(winnerFilter);
         } else if (hasFilterString()) {

@@ -30,11 +30,10 @@
  */
 package com.sun.swingset3.demos;
 
-import java.awt.*;
-import java.net.URI;
-import java.io.IOException;
 import javax.swing.*;
-import javax.jnlp.*;
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
 
 /**
  * @author Pavel Porvatov
@@ -107,7 +106,7 @@ public class DemoUtilities {
         toplevel.setLocation(x, y);
     }
 
-    public static boolean browse(URI uri) throws IOException, UnavailableServiceException {
+    public static boolean browse(URI uri) throws IOException {
         // Try using the Desktop api first
         try {
             Desktop desktop = Desktop.getDesktop();
@@ -115,13 +114,6 @@ public class DemoUtilities {
 
             return true;
         } catch (SecurityException e) {
-            // Running in sandbox, try using WebStart service
-            BasicService basicService =
-                    (BasicService) ServiceManager.lookup("javax.jnlp.BasicService");
-
-            if (basicService.isWebBrowserSupported()) {
-                return basicService.showDocument(uri.toURL());
-            }
         }
 
         return false;
