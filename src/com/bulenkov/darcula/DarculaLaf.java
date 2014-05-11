@@ -18,6 +18,7 @@ package com.bulenkov.darcula;
 
 import com.bulenkov.iconloader.IconLoader;
 import com.bulenkov.iconloader.util.ColorUtil;
+import com.bulenkov.iconloader.util.EmptyIcon;
 import com.bulenkov.iconloader.util.StringUtil;
 import com.bulenkov.iconloader.util.SystemInfo;
 import sun.awt.AppContext;
@@ -95,6 +96,8 @@ public final class DarculaLaf extends BasicLookAndFeel {
       defaults.put("Spinner.arrowButtonSize", new Dimension(16, 5));
       defaults.put("Tree.collapsedIcon", new IconUIResource(IconLoader.getIcon("/com/bulenkov/darcula/icons/treeNodeCollapsed.png")));
       defaults.put("Tree.expandedIcon", new IconUIResource(IconLoader.getIcon("/com/bulenkov/darcula/icons/treeNodeExpanded.png")));
+      defaults.put("CheckBoxMenuItem.checkIcon", EmptyIcon.create(16));
+      defaults.put("RadioButtonMenuItem.checkIcon", EmptyIcon.create(16));
 
       return defaults;
     }
