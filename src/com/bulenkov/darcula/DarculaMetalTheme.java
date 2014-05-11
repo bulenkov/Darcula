@@ -27,14 +27,14 @@ public class DarculaMetalTheme extends DefaultMetalTheme {
   private final ColorUIResource myControlHighlightColor = new ColorUIResource(108, 111, 113);
   private final ColorUIResource myControlDarkShadowColor = new ColorUIResource(39, 42, 44);
   private final ColorUIResource myControlColor = new ColorUIResource(0x3c3f41);
-  private static final ColorUIResource white = new ColorUIResource(255, 255, 255);
-  private static final ColorUIResource darkBlue = new ColorUIResource(82, 108, 164);
-  private static final ColorUIResource lightGray = new ColorUIResource(214, 214, 214);
+  private static final ColorUIResource white = new ColorUIResource(128, 128, 128);
+  private static final ColorUIResource darkBlue = new ColorUIResource(0, 44, 63);
+  private static final ColorUIResource lightGray = new ColorUIResource(109, 109, 109);
   private final ColorUIResource mySeparatorForeground = new ColorUIResource(53, 56, 58);
 
   public static final ColorUIResource primary1 = new ColorUIResource(53, 56, 58);
-  private static final ColorUIResource primary2 = new ColorUIResource(91, 135, 206);
-  private static final ColorUIResource primary3 = new ColorUIResource(166, 202, 240);
+  private static final ColorUIResource primary2 = new ColorUIResource(50, 66, 114);
+  private static final ColorUIResource primary3 = new ColorUIResource(53, 69, 91);
 
 
 
