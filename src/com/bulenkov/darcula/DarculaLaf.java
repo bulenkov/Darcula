@@ -52,10 +52,10 @@ public final class DarculaLaf extends BasicLookAndFeel {
     try {
       if (SystemInfo.isWindows || SystemInfo.isLinux) {
         base = new MetalLookAndFeel();
+        MetalLookAndFeel.setCurrentTheme(new DarculaMetalTheme());
       } else {
         final String name = UIManager.getSystemLookAndFeelClassName();
         base = (BasicLookAndFeel)Class.forName(name).newInstance();
-        MetalLookAndFeel.setCurrentTheme(new DarculaMetalTheme());
       }
     }
     catch (Exception ignore) {
