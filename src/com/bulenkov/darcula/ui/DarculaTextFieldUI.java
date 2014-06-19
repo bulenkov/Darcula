@@ -32,10 +32,6 @@ import java.awt.event.*;
  * @author Konstantin Bulenkov
  */
 public class DarculaTextFieldUI extends BasicTextFieldUI {
-  private static final Icon SEARCH_ICON = IconLoader.findIcon("/com/intellij/ide/ui/laf/darcula/icons/search.png", DarculaTextFieldUI.class, true);
-  private static final Icon SEARCH_WITH_HISTORY_ICON = IconLoader.findIcon("/com/intellij/ide/ui/laf/darcula/icons/searchWithHistory.png", DarculaTextFieldUI.class, true);
-  private static final Icon CLEAR_ICON = IconLoader.findIcon("/com/intellij/ide/ui/laf/darcula/icons/clear.png", DarculaTextFieldUI.class, true);
-
   private enum SearchAction {POPUP, CLEAR}
 
   private final JTextField myTextField;
@@ -165,14 +161,14 @@ public class DarculaTextFieldUI extends BasicTextFieldUI {
       Point p = getSearchIconCoord();
       Icon searchIcon = getComponent().getClientProperty("JTextField.Search.FindPopup") instanceof JPopupMenu ? UIManager.getIcon("TextField.darcula.searchWithHistory.icon") : UIManager.getIcon("TextField.darcula.search.icon");
       if (searchIcon == null) {
-        searchIcon = IconLoader.findIcon("/com/intellij/ide/ui/laf/icons/search.png", DarculaTextFieldUI.class, true);
+        searchIcon = IconLoader.findIcon("/com/bulenkov/darcula/icons/search.png", DarculaTextFieldUI.class, true);
       }
       searchIcon.paintIcon(null, g, p.x, p.y);
       if (getComponent().hasFocus() && getComponent().getText().length() > 0) {
         p = getClearIconCoord();
         Icon clearIcon = UIManager.getIcon("TextField.darcula.clear.icon");
         if (clearIcon == null) {
-          clearIcon = IconLoader.findIcon("/com/intellij/ide/ui/laf/icons/clear.png", DarculaTextFieldUI.class, true);
+          clearIcon = IconLoader.findIcon("/com/bulenkov/darcula/icons/clear.png", DarculaTextFieldUI.class, true);
         }
         clearIcon.paintIcon(null, g, p.x, p.y);
       }
