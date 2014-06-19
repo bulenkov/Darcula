@@ -14,25 +14,31 @@
  * limitations under the License.
  */
 
-package com.bulenkov.darcula.ui.win;
+package com.bulenkov.darcula.ui;
 
 import javax.swing.*;
-import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.border.Border;
+import javax.swing.plaf.InsetsUIResource;
+import javax.swing.plaf.UIResource;
+import java.awt.*;
 
 /**
  * @author Konstantin Bulenkov
  */
-public class DarculaWindowsInternalFrameUI extends BasicInternalFrameUI {
-  public DarculaWindowsInternalFrameUI(JInternalFrame b) {
-    super(b);
-  }
+public class DarculaInternalFrameBorder implements Border, UIResource {
+    @Override
+    public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+      g.setColor(UIManager.getColor("InternalFrame.darcula.borderColor"));
+      g.drawRect(x, y, w-1, h-1);
+    }
 
+    @Override
+    public Insets getBorderInsets(Component c) {
+        return new InsetsUIResource(1, 1, 1, 1);
+    }
 
-  @SuppressWarnings({"MethodOverridesStaticMethodOfSuperclass", "UnusedDeclaration"})
-  public static ComponentUI createUI(JComponent c) {
-    return new DarculaWindowsInternalFrameUI(((JInternalFrame) c));
-  }
-
-
+    @Override
+    public boolean isBorderOpaque() {
+        return true;
+    }
 }

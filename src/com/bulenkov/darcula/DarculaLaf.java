@@ -98,7 +98,7 @@ public final class DarculaLaf extends BasicLookAndFeel {
       defaults.put("Tree.expandedIcon", new IconUIResource(IconLoader.getIcon("/com/bulenkov/darcula/icons/treeNodeExpanded.png")));
       defaults.put("CheckBoxMenuItem.checkIcon", EmptyIcon.create(16));
       defaults.put("RadioButtonMenuItem.checkIcon", EmptyIcon.create(16));
-
+      defaults.put("InternalFrame.icon", new IconUIResource(IconLoader.getIcon("/com/bulenkov/darcula/icons/internalFrame.png")));
       return defaults;
     }
     catch (Exception ignore) {
