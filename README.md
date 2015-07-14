@@ -1,4 +1,4 @@
-Darcula
-=======
+Darcula IDE Theme
+=================
 
-Darcula Look and Feel
+The official Darcula look and feel for programming environments.
