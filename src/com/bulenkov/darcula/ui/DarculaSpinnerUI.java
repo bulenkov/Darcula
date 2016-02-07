@@ -52,13 +52,13 @@ public class DarculaSpinnerUI extends BasicSpinnerUI {
 
   @Override
   protected void replaceEditor(JComponent oldEditor, JComponent newEditor) {
-    super.replaceEditor(oldEditor, newEditor);
-    if (oldEditor != null) {
-      oldEditor.getComponents()[0].removeFocusListener(myFocusListener);
-    }
-    if (newEditor != null) {
-      newEditor.getComponents()[0].addFocusListener(myFocusListener);
-    }
+      super.replaceEditor(oldEditor, newEditor);
+      if (oldEditor != null && oldEditor.getComponents().length > 0) {
+          oldEditor.getComponents()[0].removeFocusListener(myFocusListener);
+      }
+      if (newEditor != null && newEditor.getComponents().length > 0) {
+          newEditor.getComponents()[0].addFocusListener(myFocusListener);
+      }
   }
 
   @Override
