@@ -5,6 +5,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/swingset2" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/swingset3" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/combos" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -13,4 +14,3 @@
     <orderEntry type="module" module-name="Darcula" />
   </component>
 </module>
-
