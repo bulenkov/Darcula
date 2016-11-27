@@ -25,27 +25,40 @@ import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 /**
  * @author Konstantin Bulenkov
  */
 public class DarculaPasswordFieldUI extends BasicPasswordFieldUI {
 
+  private FocusListener myFocusListener = new FocusAdapter() {
+    @Override
+    public void focusGained(FocusEvent e) {
+      getComponent().repaint();
+    }
+
+    @Override
+    public void focusLost(FocusEvent e) {
+      getComponent().repaint();
+    }
+  };
+
   @SuppressWarnings({"MethodOverridesStaticMethodOfSuperclass", "UnusedDeclaration"})
   public static ComponentUI createUI(final JComponent c) {
-    c.addFocusListener(new FocusAdapter() {
-      @Override
-      public void focusGained(FocusEvent e) {
-        c.repaint();
-      }
-
-      @Override
-      public void focusLost(FocusEvent e) {
-        c.repaint();
-      }
-    });
-
     return new DarculaPasswordFieldUI();
+  }
+
+  @Override
+  protected void installListeners() {
+    super.installListeners();
+    getComponent().addFocusListener(myFocusListener);
+  }
+
+  @Override
+  protected void uninstallListeners() {
+    getComponent().removeFocusListener(myFocusListener);
+    super.uninstallListeners();
   }
 
   @Override

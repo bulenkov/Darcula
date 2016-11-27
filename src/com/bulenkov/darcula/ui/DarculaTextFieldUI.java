@@ -32,62 +32,78 @@ import java.awt.event.*;
  * @author Konstantin Bulenkov
  */
 public class DarculaTextFieldUI extends BasicTextFieldUI {
+
+  private final FocusListener myFocusListener = new FocusAdapter() {
+    @Override
+    public void focusGained(FocusEvent e) {
+      getComponent().repaint();
+    }
+
+    @Override
+    public void focusLost(FocusEvent e) {
+      getComponent().repaint();
+    }
+  };
+
+  private final MouseMotionListener myMouseMotionListener = new MouseMotionAdapter() {
+    @Override
+    public void mouseMoved(MouseEvent e) {
+      if (getComponent() != null && isSearchField(getComponent())) {
+        if (getActionUnder(e) != null) {
+          getComponent().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        } else {
+          getComponent().setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+        }
+      }
+    }
+  };
+
+  private final MouseListener myMouseListener = new MouseAdapter() {
+    @Override
+    public void mouseClicked(MouseEvent e) {
+      if (isSearchField(getComponent())) {
+        final SearchAction action = getActionUnder(e);
+        if (action != null) {
+          switch (action) {
+            case POPUP:
+              showSearchPopup();
+              break;
+            case CLEAR:
+              getComponent().setText("");
+              break;
+          }
+          e.consume();
+        }
+      }
+    }
+  };
+
   private enum SearchAction {POPUP, CLEAR}
 
-  private final JTextField myTextField;
   protected JLabel myClearIcon;
   protected JLabel myRecentIcon;
 
-  public DarculaTextFieldUI(JTextField textField) {
-    myTextField = textField;
-  }
-
   @SuppressWarnings("MethodOverridesStaticMethodOfSuperclass")
   public static ComponentUI createUI(final JComponent c) {
-    final DarculaTextFieldUI ui = new DarculaTextFieldUI((JTextField)c);
-    c.addFocusListener(new FocusAdapter() {
-      @Override
-      public void focusGained(FocusEvent e) {
-        c.repaint();
-      }
+    return new DarculaTextFieldUI();
+  }
 
-      @Override
-      public void focusLost(FocusEvent e) {
-        c.repaint();
-      }
-    });
-    c.addMouseMotionListener(new MouseMotionAdapter() {
-      @Override
-      public void mouseMoved(MouseEvent e) {
-        if (ui.getComponent() != null && isSearchField(c)) {
-          if (ui.getActionUnder(e) != null) {
-            c.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-          } else {
-            c.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-          }
-        }
-      }
-    });
-    c.addMouseListener(new MouseAdapter() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        if (isSearchField(c)) {
-          final SearchAction action = ui.getActionUnder(e);
-          if (action != null) {
-            switch (action) {
-              case POPUP:
-                ui.showSearchPopup();
-                break;
-              case CLEAR:
-                ((JTextField)c).setText("");
-                break;
-            }
-            e.consume();
-          }
-        }
-      }
-    });
-    return ui;
+  @Override
+  protected void installListeners() {
+    super.installListeners();
+    final JTextComponent c = getComponent();
+    c.addFocusListener(myFocusListener);
+    c.addMouseMotionListener(myMouseMotionListener);
+    c.addMouseListener(myMouseListener);
+  }
+
+  @Override
+  protected void uninstallListeners() {
+    final JTextComponent c = getComponent();
+    c.removeMouseListener(myMouseListener);
+    c.removeMouseMotionListener(myMouseMotionListener);
+    c.removeFocusListener(myFocusListener);
+    super.uninstallListeners();
   }
 
   protected void showSearchPopup() {
@@ -110,7 +126,7 @@ public class DarculaTextFieldUI extends BasicTextFieldUI {
   }
 
   protected Rectangle getDrawingRect() {
-    final JTextComponent c = myTextField;
+    final JTextComponent c = getComponent();
     final Insets i = c.getInsets();
     final int x = i.right - 4 - 16;
     final int y = i.top - 3;
