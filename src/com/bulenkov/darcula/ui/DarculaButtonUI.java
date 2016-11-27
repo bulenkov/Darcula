@@ -45,7 +45,7 @@ public class DarculaButtonUI extends BasicButtonUI {
     final Border border = c.getBorder();
     final GraphicsConfig config = GraphicsUtil.setupAAPainting(g);
     final boolean square = isSquare(c);
-    if (c.isEnabled() && border != null) {
+    if (c.isEnabled() && border != null && ((JButton)c).isContentAreaFilled()) {
       final Insets ins = border.getBorderInsets(c);
       final int yOff = (ins.top + ins.bottom) / 4;
       if (!square) {
