@@ -42,11 +42,6 @@ import java.awt.geom.Path2D;
 @SuppressWarnings("GtkPreferredJComboBoxRenderer")
 public class DarculaComboBoxUI extends BasicComboBoxUI implements Border {
   private final JComboBox myComboBox;
-  // Flag for calculating the display size
-  private boolean myDisplaySizeDirty = true;
-
-  // Cached the size that the display needs to render the largest item
-  private Dimension myDisplaySizeCache = new Dimension(0, 0);
   private Insets myPadding;
 
   public DarculaComboBoxUI(JComboBox comboBox) {
@@ -126,65 +121,6 @@ public class DarculaComboBoxUI extends BasicComboBoxUI implements Border {
   @Override
   protected Insets getInsets() {
     return new InsetsUIResource(4, 7, 4, 5);
-  }
-
-  protected Dimension getDisplaySize() {
-    Dimension display = new Dimension();
-
-    ListCellRenderer renderer = comboBox.getRenderer();
-    if (renderer == null) {
-      renderer = new DefaultListCellRenderer();
-    }
-
-    boolean sameBaseline = true;
-
-    Object prototypeValue = comboBox.getPrototypeDisplayValue();
-    if (prototypeValue != null) {
-      display = getSizeForComponent(renderer.getListCellRendererComponent(listBox, prototypeValue, -1, false, false));
-    } else {
-      final ComboBoxModel model = comboBox.getModel();
-
-      int baseline = -1;
-      Dimension d;
-
-      if (model.getSize() > 0) {
-        for (int i = 0; i < model.getSize(); i++) {
-          Object value = model.getElementAt(i);
-          Component rendererComponent = renderer.getListCellRendererComponent(listBox, value, -1, false, false);
-          d = getSizeForComponent(rendererComponent);
-          if (sameBaseline && value != null && (!(value instanceof String) || !"".equals(value))) {
-            int newBaseline = rendererComponent.getBaseline(d.width, d.height);
-            if (newBaseline == -1) {
-              sameBaseline = false;
-            }
-            else if (baseline == -1) {
-              baseline = newBaseline;
-            }
-            else if (baseline != newBaseline) {
-              sameBaseline = false;
-            }
-          }
-          display.width = Math.max(display.width, d.width);
-          display.height = Math.max(display.height, d.height);
-        }
-      }
-      else {
-        display = getDefaultSize();
-        if (comboBox.isEditable()) {
-          display.width = 100;
-        }
-      }
-    }
-
-    if (myPadding != null) {
-      display.width += myPadding.left + myPadding.right;
-      display.height += myPadding.top + myPadding.bottom;
-    }
-
-    myDisplaySizeCache.setSize(display.width, display.height);
-    myDisplaySizeDirty = false;
-
-    return display;
   }
 
   protected Dimension getSizeForComponent(Component comp) {
@@ -400,5 +336,15 @@ public class DarculaComboBoxUI extends BasicComboBoxUI implements Border {
   @Override
   public boolean isBorderOpaque() {
     return false;
+  }
+
+  @Override
+  public Component.BaselineResizeBehavior getBaselineResizeBehavior(JComponent c) {
+    return super.getBaselineResizeBehavior(c);
+  }
+
+  @Override
+  public int getBaseline(JComponent c, int width, int height) {
+    return super.getBaseline(c, width, height);
   }
 }
