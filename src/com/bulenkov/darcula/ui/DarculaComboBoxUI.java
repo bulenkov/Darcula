@@ -134,7 +134,7 @@ public class DarculaComboBoxUI extends BasicComboBoxUI implements Border {
   @Override
   public void paint(Graphics g, JComponent c) {
     final Container parent = c.getParent();
-    if (parent != null) {
+    if (c.isOpaque() && parent != null) {
       g.setColor(parent.getBackground());
       g.fillRect(0, 0, c.getWidth(), c.getHeight());
     }
