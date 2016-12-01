@@ -35,4 +35,8 @@ public class DarculaToolBarUI extends MetalToolBarUI {
     g.setColor(UIManager.getColor("ToolBar.background"));
     g.fillRect(0, 0, c.getWidth(), c.getHeight());
   }
+
+  @Override
+  protected void setBorderToNonRollover(Component c) {
+  }
 }
