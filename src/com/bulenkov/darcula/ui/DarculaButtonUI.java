@@ -40,6 +40,10 @@ public class DarculaButtonUI extends BasicButtonUI {
     return c instanceof JButton && "square".equals(((JButton)c).getClientProperty("JButton.buttonType"));
   }
 
+  public static boolean isIndeterminate(Component c) {
+    return c instanceof JComponent && "indeterminate".equals(((JComponent)c).getClientProperty("JButton.selectedState"));
+  }
+
   @Override
   public void paint(Graphics g, JComponent c) {
     final AbstractButton button = (AbstractButton) c;
