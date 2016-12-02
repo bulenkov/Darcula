@@ -30,6 +30,8 @@ import javax.swing.plaf.metal.MetalCheckBoxUI;
 import javax.swing.text.View;
 import java.awt.*;
 
+import static com.bulenkov.darcula.ui.DarculaButtonUI.isIndeterminate;
+
 /**
  * @author Konstantin Bulenkov
  */
@@ -113,7 +115,14 @@ public class DarculaCheckBoxUI extends MetalCheckBoxUI {
         g.drawRoundRect(0, 0, w, h - 1, 4, 4);
       }
 
-      if (b.getModel().isSelected()) {
+      if (isIndeterminate(c) && b.getModel().isSelected()) {
+        g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+        g.setStroke(new BasicStroke(1 *2.0f, BasicStroke.CAP_ROUND,BasicStroke.JOIN_ROUND));
+        g.setPaint(getShadowColor(b.isEnabled()));
+        g.drawLine(4, 8, w-4, 8);
+        g.setPaint(getCheckSignColor(b.isEnabled()));
+        g.drawLine(4, 6, w-4, 6);
+      } else if (b.getModel().isSelected()) {
         g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
         g.setStroke(new BasicStroke(1 *2.0f, BasicStroke.CAP_ROUND,BasicStroke.JOIN_ROUND));
         g.setPaint(getShadowColor(b.isEnabled()));
