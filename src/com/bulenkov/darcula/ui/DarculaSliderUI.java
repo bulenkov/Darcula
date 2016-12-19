@@ -27,6 +27,7 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSliderUI;
 import java.awt.*;
 import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 
@@ -53,10 +54,10 @@ public class DarculaSliderUI extends BasicSliderUI {
   public void paintTrack(Graphics g2d) {
     Graphics2D g = (Graphics2D) g2d;
     Rectangle trackBounds = trackRect;
-    final int arc = JBUI.scale(5);
-    int trackSize = JBUI.scale(5);
+    final int arc = JBUI.scale(6);
+    int trackSize = JBUI.scale(6);
     final GraphicsConfig config = GraphicsUtil.setupAAPainting(g);
-    final Color bg = ColorUtil.fromHex("2b2b2b");
+    final Color bg = getTrackBackground();
     final Color selection = slider.isEnabled() ? getSelectedTrackColor() : getDisabledTickColor();
     if (slider.getOrientation() == JSlider.HORIZONTAL) {
       int cy = (trackBounds.height / 2) - trackSize / 2;
@@ -79,6 +80,19 @@ public class DarculaSliderUI extends BasicSliderUI {
       g.translate(-(trackBounds.x + cx), -trackBounds.y);
     }
     config.restore();
+  }
+
+  @Override
+  protected Dimension getThumbSize() {
+    if (isPlainThumb()) {
+      return new Dimension(JBUI.scale(20), JBUI.scale(20));
+    }
+    return super.getThumbSize();
+  }
+
+  @NotNull
+  protected Color getTrackBackground() {
+    return ColorUtil.fromHex("2b2b2b");
   }
 
   @NotNull
@@ -160,15 +174,11 @@ public class DarculaSliderUI extends BasicSliderUI {
         g.setColor(slider.getBackground().darker());
     }
 
-    Boolean paintThumbArrowShape =
-        (Boolean)slider.getClientProperty("Slider.paintThumbArrowShape");
 
-    if ((!slider.getPaintTicks() && paintThumbArrowShape == null) ||
-        paintThumbArrowShape == Boolean.FALSE) {
-
-        // "plain" version
-      final RoundRectangle2D.Double thumb = new RoundRectangle2D.Double(0, 0, w, h, JBUI.scale(6), JBUI.scale(6));
-      final RoundRectangle2D.Double innerThumb = new RoundRectangle2D.Double(1, 1, w-2, h-2, JBUI.scale(6)-2, JBUI.scale(6)-2);
+    if (isPlainThumb()) {
+      double r = slider.getOrientation() == JSlider.HORIZONTAL ? h : w;
+      final Ellipse2D.Double thumb = new Ellipse2D.Double(0, 0, r, r);
+      final Ellipse2D.Double innerThumb = new Ellipse2D.Double(1, 1, r-2, r-2);
       g.setColor(ColorUtil.fromHex("555555"));
       ((Graphics2D) g).fill(thumb);
       g.setColor(slider.isEnabled() ? getSelectedTrackColor() : getDisabledTickColor());
@@ -243,5 +253,11 @@ public class DarculaSliderUI extends BasicSliderUI {
 
     g.translate(-knobBounds.x, -knobBounds.y);
     config.restore();
+  }
+
+  protected boolean isPlainThumb() {
+    Boolean paintThumbArrowShape = (Boolean)slider.getClientProperty("Slider.paintThumbArrowShape");
+    return (!slider.getPaintTicks() && paintThumbArrowShape == null) ||
+        paintThumbArrowShape == Boolean.FALSE;
   }
 }
