@@ -16,7 +16,6 @@
 
 package com.bulenkov.darcula.ui;
 
-import com.bulenkov.iconloader.util.ColorUtil;
 import com.bulenkov.iconloader.util.GraphicsConfig;
 import com.bulenkov.iconloader.util.GraphicsUtil;
 import com.intellij.util.ui.JBDimension;
@@ -98,22 +97,17 @@ public class DarculaSliderUI extends BasicSliderUI {
 
   @NotNull
   protected Color getTrackBackground() {
-    return ColorUtil.fromHex("2b2b2b");
+    return UIManager.getColor("Slider.trackBackground");
   }
 
   @NotNull
   protected Color getSelectedTrackColor() {
-    return ColorUtil.fromHex("888888");
+    return UIManager.getColor("Slider.selectedTrackColor");
   }
 
   @NotNull
   protected Color getDisabledTickColor() {
-    return ColorUtil.fromHex("555555");
-  }
-
-  @Override
-  public void paintTicks(Graphics g) {
-    super.paintTicks(g);
+    return UIManager.getColor("Slider.disabledTickColor");
   }
 
   @Override
@@ -178,7 +172,6 @@ public class DarculaSliderUI extends BasicSliderUI {
     } else {
       g.setColor(slider.getBackground().darker());
     }
-
 
     if (isPlainThumb()) {
       double r = slider.getOrientation() == JSlider.HORIZONTAL ? h : w;
@@ -259,7 +252,7 @@ public class DarculaSliderUI extends BasicSliderUI {
 
   @NotNull
   protected Color getThumbBorderColor() {
-    return slider.isEnabled() ? ColorUtil.fromHex("707070") : ColorUtil.fromHex("444444");
+    return slider.isEnabled() ? UIManager.getColor("Slider.thumbBorderColor") : UIManager.getColor("Slider.thumbBorderColorDisabled");
   }
 
   protected boolean isPlainThumb() {
