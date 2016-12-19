@@ -63,8 +63,8 @@ public class DarculaSliderUI extends BasicSliderUI {
     if (slider.getOrientation() == JSlider.HORIZONTAL) {
       int cy = (trackBounds.height / 2) - trackSize / 2;
       int cw = trackBounds.width;
-      final Area shape = new Area(new RoundRectangle2D.Double(0, 0, cw, trackSize, arc, arc));
       g.translate(trackBounds.x, trackBounds.y + cy);
+      final Area shape = new Area(new RoundRectangle2D.Double(0, 0, cw, trackSize, arc, arc));
       g.setColor(bg);
       g.fill(shape);
       int x = thumbRect.x;
@@ -76,8 +76,13 @@ public class DarculaSliderUI extends BasicSliderUI {
       int cx = (trackBounds.width / 2) - trackSize / 2;
       int ch = trackBounds.height;
       g.translate(trackBounds.x + cx, trackBounds.y);
+      final Area shape = new Area(new RoundRectangle2D.Double(0, 0, cx, ch, arc, arc));
       g.setColor(bg);
-      g.fillRoundRect(0, 0, trackSize, ch, arc, arc);
+      g.fill(shape);
+      int y = thumbRect.y;
+      shape.intersect(new Area(new Rectangle2D.Double(0, y, cx, ch)));
+      g.setColor(selection);
+      g.fill(shape);
       g.translate(-(trackBounds.x + cx), -trackBounds.y);
     }
     config.restore();
