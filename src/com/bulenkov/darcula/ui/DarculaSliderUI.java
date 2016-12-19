@@ -19,6 +19,7 @@ package com.bulenkov.darcula.ui;
 import com.bulenkov.iconloader.util.ColorUtil;
 import com.bulenkov.iconloader.util.GraphicsConfig;
 import com.bulenkov.iconloader.util.GraphicsUtil;
+import com.intellij.util.ui.JBDimension;
 import com.intellij.util.ui.JBUI;
 import org.jetbrains.annotations.NotNull;
 
@@ -58,7 +59,7 @@ public class DarculaSliderUI extends BasicSliderUI {
     int trackSize = JBUI.scale(6);
     final GraphicsConfig config = GraphicsUtil.setupAAPainting(g);
     final Color bg = getTrackBackground();
-    final Color selection = slider.isEnabled() ? getSelectedTrackColor() : getDisabledTickColor();
+    final Color selection = getThumbColor();
     if (slider.getOrientation() == JSlider.HORIZONTAL) {
       int cy = (trackBounds.height / 2) - trackSize / 2;
       int cw = trackBounds.width;
@@ -87,7 +88,7 @@ public class DarculaSliderUI extends BasicSliderUI {
     if (isPlainThumb()) {
       return new Dimension(JBUI.scale(20), JBUI.scale(20));
     }
-    return super.getThumbSize();
+    return slider.getOrientation() == JSlider.HORIZONTAL ? new JBDimension(12, 20) : new JBDimension(20, 12);
   }
 
   @NotNull
@@ -167,96 +168,97 @@ public class DarculaSliderUI extends BasicSliderUI {
 
     g.translate(knobBounds.x, knobBounds.y);
 
-    if ( slider.isEnabled() ) {
-        g.setColor(slider.getBackground());
-    }
-    else {
-        g.setColor(slider.getBackground().darker());
+    if (slider.isEnabled()) {
+      g.setColor(slider.getBackground());
+    } else {
+      g.setColor(slider.getBackground().darker());
     }
 
 
     if (isPlainThumb()) {
       double r = slider.getOrientation() == JSlider.HORIZONTAL ? h : w;
       final Ellipse2D.Double thumb = new Ellipse2D.Double(0, 0, r, r);
-      final Ellipse2D.Double innerThumb = new Ellipse2D.Double(1, 1, r-2, r-2);
-      g.setColor(ColorUtil.fromHex("555555"));
+      final Ellipse2D.Double innerThumb = new Ellipse2D.Double(1, 1, r - 2, r - 2);
+      g.setColor(getThumbBorderColor());
       ((Graphics2D) g).fill(thumb);
-      g.setColor(slider.isEnabled() ? getSelectedTrackColor() : getDisabledTickColor());
+      g.setColor(getThumbColor());
       ((Graphics2D) g).fill(innerThumb);
-    }
-    else if ( slider.getOrientation() == JSlider.HORIZONTAL ) {
-        int cw = w / 2;
-        g.fillRect(1, 1, w-3, h-1-cw);
-        Polygon p = new Polygon();
-        p.addPoint(1, h-cw);
-        p.addPoint(cw-1, h-1);
-        p.addPoint(w-2, h-1-cw);
+    } else if (slider.getOrientation() == JSlider.HORIZONTAL) {
+      int cw = w / 2;
+      g.setColor(getThumbBorderColor());
+      Polygon p = new Polygon(); //border
+      p.addPoint(0, 0);
+      p.addPoint(w - 1, 0);
+      p.addPoint(w - 1, h - cw);
+      p.addPoint(cw, h - 1);
+      p.addPoint(0, h - cw);
+      g.fillPolygon(p);
+
+      g.setColor(getThumbColor());
+      p = new Polygon();
+      p.addPoint(1, 1);
+      p.addPoint(w - 2, 1);
+      p.addPoint(w - 2, h - cw - 1);
+      p.addPoint(cw, h - 2);
+      p.addPoint(1, h - cw - 1);
+      g.fillPolygon(p);
+    } else {  // vertical
+      int cw = h / 2;
+      if (slider.getComponentOrientation().isLeftToRight()) {
+        g.setColor(getThumbBorderColor());
+        Polygon p = new Polygon(); //border
+        p.addPoint(0, 0);
+        p.addPoint(w - cw, 0);
+        p.addPoint(w - 1, h - cw);
+        p.addPoint(w - cw, h - 1);
+        p.addPoint(0, h - 1);
         g.fillPolygon(p);
 
-        g.setColor(getHighlightColor());
-        g.drawLine(0, 0, w-2, 0);
-        g.drawLine(0, 1, 0, h-1-cw);
-        g.drawLine(0, h-cw, cw-1, h-1);
+        g.setColor(getThumbColor());
+        p = new Polygon();
+        p.addPoint(1, 1);
+        p.addPoint(w - cw, 1);
+        p.addPoint(w - 2, h - cw);
+        p.addPoint(w - cw, h - 2);
+        p.addPoint(1, h - 2);
+        g.fillPolygon(p);
+      } else {
+        g.setColor(getThumbBorderColor());
+        Polygon p = new Polygon(); //border
+        p.addPoint(w - 1, 0);
+        p.addPoint(cw, 0);
+        p.addPoint(0, h - cw);
+        p.addPoint(cw, h - 1);
+        p.addPoint(w - 1 , h - 1);
+        g.fillPolygon(p);
 
-        g.setColor(Color.black);
-        g.drawLine(w-1, 0, w-1, h-2-cw);
-        g.drawLine(w-1, h-1-cw, w-1-cw, h-1);
-
-        g.setColor(getShadowColor());
-        g.drawLine(w-2, 1, w-2, h-2-cw);
-        g.drawLine(w-2, h-1-cw, w-1-cw, h-2);
-    }
-    else {  // vertical
-        int cw = h / 2;
-        if(slider.getComponentOrientation().isLeftToRight()) {
-              g.fillRect(1, 1, w-1-cw, h-3);
-              Polygon p = new Polygon();
-              p.addPoint(w-cw-1, 0);
-              p.addPoint(w-1, cw);
-              p.addPoint(w-1-cw, h-2);
-              g.fillPolygon(p);
-
-              g.setColor(getHighlightColor());
-              g.drawLine(0, 0, 0, h - 2);                  // left
-              g.drawLine(1, 0, w-1-cw, 0);                 // top
-              g.drawLine(w-cw-1, 0, w-1, cw);              // top slant
-
-              g.setColor(Color.black);
-              g.drawLine(0, h-1, w-2-cw, h-1);             // bottom
-              g.drawLine(w-1-cw, h-1, w-1, h-1-cw);        // bottom slant
-
-              g.setColor(getShadowColor());
-              g.drawLine(1, h-2, w-2-cw,  h-2 );         // bottom
-              g.drawLine(w-1-cw, h-2, w-2, h-cw-1 );     // bottom slant
-        }
-        else {
-              g.fillRect(5, 1, w-1-cw, h-3);
-              Polygon p = new Polygon();
-              p.addPoint(cw, 0);
-              p.addPoint(0, cw);
-              p.addPoint(cw, h-2);
-              g.fillPolygon(p);
-
-              g.setColor(getHighlightColor());
-              g.drawLine(cw-1, 0, w-2, 0);             // top
-              g.drawLine(0, cw, cw, 0);                // top slant
-
-              g.setColor(Color.black);
-              g.drawLine(0, h-1-cw, cw, h-1 );         // bottom slant
-              g.drawLine(cw, h-1, w-1, h-1);           // bottom
-
-              g.setColor(getShadowColor());
-              g.drawLine(cw, h-2, w-2,  h-2 );         // bottom
-              g.drawLine(w-1, 1, w-1,  h-2 );          // right
-        }
+        g.setColor(getThumbColor());
+        p = new Polygon();
+        p.addPoint(w - 2, 1);
+        p.addPoint(cw + 1, 1);
+        p.addPoint(1, h - cw);
+        p.addPoint(cw + 1, h - 2);
+        p.addPoint(w - 2, h - 2);
+        g.fillPolygon(p);
+      }
     }
 
     g.translate(-knobBounds.x, -knobBounds.y);
     config.restore();
   }
 
+  @NotNull
+  protected Color getThumbColor() {
+    return slider.isEnabled() ? getSelectedTrackColor() : getDisabledTickColor();
+  }
+
+  @NotNull
+  protected Color getThumbBorderColor() {
+    return slider.isEnabled() ? ColorUtil.fromHex("707070") : ColorUtil.fromHex("444444");
+  }
+
   protected boolean isPlainThumb() {
-    Boolean paintThumbArrowShape = (Boolean)slider.getClientProperty("Slider.paintThumbArrowShape");
+    Boolean paintThumbArrowShape = (Boolean) slider.getClientProperty("Slider.paintThumbArrowShape");
     return (!slider.getPaintTicks() && paintThumbArrowShape == null) ||
         paintThumbArrowShape == Boolean.FALSE;
   }
