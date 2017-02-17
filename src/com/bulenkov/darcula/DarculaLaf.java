@@ -75,7 +75,7 @@ public final class DarculaLaf extends BasicLookAndFeel {
   }
 
   @SuppressWarnings("UnusedParameters")
-  private static void log(Exception e) {
+  private static void log(Throwable e) {
     //everything is gonna be alright
     //e.printStackTrace();
   }
@@ -130,7 +130,7 @@ public final class DarculaLaf extends BasicLookAndFeel {
       keyField.setAccessible(true);
       final Object key = keyField.get(null);
       AppContext.getAppContext().put(key, defaultStyles);
-    } catch (Exception e) {
+    } catch (Throwable e) {
       log(e);
     }
   }
