@@ -9,8 +9,9 @@ Darcula Look-n-Feel is licensed under Apache 2.0 license and can be used in comm
 
 List of projects with Darcula theme:
 1. JetBrains IDEs: IntelliJ IDEA, PyCharm, PhpStorm, WebStorm, AppCode, DataGrip, RubyMine, Gogland, Rider, CLion
-2. NetBeans
-3. jAlbum
+2. Google Android Studio
+3. NetBeans
+4. jAlbum
 4. Please send me your project to add here
 
 
