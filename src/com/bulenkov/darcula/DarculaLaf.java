@@ -104,6 +104,10 @@ public final class DarculaLaf extends BasicLookAndFeel {
       defaults.put("OptionPane.questionIcon", new IconUIResource(IconLoader.getIcon("/com/bulenkov/darcula/icons/option_pane_question.png")));
       defaults.put("OptionPane.warningIcon", new IconUIResource(IconLoader.getIcon("/com/bulenkov/darcula/icons/option_pane_warning.png")));
       defaults.put("OptionPane.errorIcon", new IconUIResource(IconLoader.getIcon("/com/bulenkov/darcula/icons/option_pane_error.png")));
+      if (SystemInfo.isMac && !"true".equalsIgnoreCase(System.getProperty("apple.laf.useScreenMenuBar", "false"))) {
+        defaults.put("MenuBarUI", "com.bulenkov.darcula.ui.DarculaMenuBarUI");
+        defaults.put("MenuUI", "javax.swing.plaf.basic.BasicMenuUI");
+      }
       return defaults;
     }
     catch (Exception ignore) {
