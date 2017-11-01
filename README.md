@@ -14,6 +14,7 @@ List of projects with Darcula theme:
 4. [jAlbum](https://jalbum.net/en/)
 5. [Mapollage](https://trixon.se/projects/mapollage/)
 6. [Jotasync](https://trixon.se/projects/jotasync/)
+7. [Apache JMeter](http://jmeter.apache.org/)
 
 Please send me your project to add here
 
