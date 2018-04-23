@@ -96,6 +96,7 @@ public final class DarculaLaf extends BasicLookAndFeel {
       defaults.put("Spinner.arrowButtonSize", new Dimension(16, 5));
       defaults.put("Tree.collapsedIcon", new IconUIResource(IconLoader.getIcon("/com/bulenkov/darcula/icons/treeNodeCollapsed.png")));
       defaults.put("Tree.expandedIcon", new IconUIResource(IconLoader.getIcon("/com/bulenkov/darcula/icons/treeNodeExpanded.png")));
+      defaults.put("Menu.arrowIcon", new IconUIResource(IconLoader.getIcon("/com/bulenkov/darcula/icons/menuItemArrowIcon.png")));
       defaults.put("CheckBoxMenuItem.checkIcon", EmptyIcon.create(16));
       defaults.put("RadioButtonMenuItem.checkIcon", EmptyIcon.create(16));
       defaults.put("InternalFrame.icon", new IconUIResource(IconLoader.getIcon("/com/bulenkov/darcula/icons/internalFrame.png")));
@@ -103,6 +104,10 @@ public final class DarculaLaf extends BasicLookAndFeel {
       defaults.put("OptionPane.questionIcon", new IconUIResource(IconLoader.getIcon("/com/bulenkov/darcula/icons/option_pane_question.png")));
       defaults.put("OptionPane.warningIcon", new IconUIResource(IconLoader.getIcon("/com/bulenkov/darcula/icons/option_pane_warning.png")));
       defaults.put("OptionPane.errorIcon", new IconUIResource(IconLoader.getIcon("/com/bulenkov/darcula/icons/option_pane_error.png")));
+      if (SystemInfo.isMac && !"true".equalsIgnoreCase(System.getProperty("apple.laf.useScreenMenuBar", "false"))) {
+        defaults.put("MenuBarUI", "com.bulenkov.darcula.ui.DarculaMenuBarUI");
+        defaults.put("MenuUI", "javax.swing.plaf.basic.BasicMenuUI");
+      }
       return defaults;
     }
     catch (Exception ignore) {
