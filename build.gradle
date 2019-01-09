@@ -1,0 +1,29 @@
+apply plugin: 'java-library'
+apply plugin: 'maven'
+
+group = 'com.bulenkov'
+description='Darcula LaF Library'
+
+sourceCompatibility = 1.8
+compileJava.options.encoding = 'UTF-8'
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+        resources {
+            srcDirs = ['src']
+            exclude '**/*.java'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'lib', include: '*.jar') 
+}
+
+jar {
+    from sourceSets.main.output
+    from zipTree('lib/iconloader.jar')
+}
