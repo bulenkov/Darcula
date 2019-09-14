@@ -92,6 +92,7 @@ public final class DarculaLaf extends BasicLookAndFeel {
       initIdeaDefaults(defaults);
       patchStyledEditorKit();
       patchComboBox(metalDefaults, defaults);
+      UIManager.put("Label.font", defaults.get("Label.font"));
       defaults.remove("Spinner.arrowButtonBorder");
       defaults.put("Spinner.arrowButtonSize", new Dimension(16, 5));
       defaults.put("Tree.collapsedIcon", new IconUIResource(IconLoader.getIcon("/com/bulenkov/darcula/icons/treeNodeCollapsed.png")));
